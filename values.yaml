@@ -1,0 +1,12 @@
+image:
+  repository: mansing2/mansing
+  tag: 1.0.0
+  pullPolicy: IfNotPresent
+
+keel: 
+  policy: all
+  trigger: poll
+  pollSchedule: "@every 3m"
+  images:
+    - repository: image.repository
+      tag: image.tag

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pushwf
+  labels:
+    name: "pushwf"
+  annotations:
+    keel.sh/policy: {{ .Values.keel.policy  }}
+    keel.sh/trigger: {{ .Values.keel.trigger }}
+    keel.sh/pollSchedule: {{ .Values.keel.pollSchedule | quote }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: pushwf
+  template:
+    metadata:
+      name: pushwf
+      labels:
+        app: pushwf
+    spec:
+      containers:
+      - name: pushwf
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
